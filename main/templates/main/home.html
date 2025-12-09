@@ -3,11 +3,8 @@
 {% block content %}
 
 <div class="carousel-container">
-    <div class="carousel-wrapper">
 
-        {% if images|length > 1 %}
-            <button class="carousel-btn prev">&#10094;</button>
-        {% endif %}
+    <div class="carousel-wrapper desktop-carousel">
 
         <div class="carousel-slide">
             {% for image in images %}
@@ -18,60 +15,61 @@
         </div>
 
         {% if images|length > 1 %}
+            <button class="carousel-btn prev">&#10094;</button>
             <button class="carousel-btn next">&#10095;</button>
         {% endif %}
     </div>
+
+    <!-- MOBILE LIST VIEW -->
+    <div class="mobile-image-list">
+        {% for image in images %}
+            <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+        {% endfor %}
+    </div>
+
 </div>
 
 
 <script>
-// ----------------------
-// CAROUSEL LOGIC
-// ----------------------
-const slides = document.querySelectorAll('.slide');
-let index = 0;
+// Only run carousel JS on desktop
+if (window.innerWidth >= 900) {
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
 
-function showSlide(i) {
-    slides.forEach((s, idx) => {
-        s.classList.toggle("active", idx === i);
-        s.style.display = idx === i ? "block" : "none";
-    });
-}
+    function showSlide(i) {
+        slides.forEach((s, idx) => {
+            s.style.display = idx === i ? "block" : "none";
+        });
+    }
 
-// Buttons only exist if >1 slide
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
 
-if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
+    if (prevBtn) prevBtn.onclick = () => {
         index = (index - 1 + slides.length) % slides.length;
         showSlide(index);
-    });
-}
+    };
 
-if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
+    if (nextBtn) nextBtn.onclick = () => {
         index = (index + 1) % slides.length;
         showSlide(index);
+    };
+
+    document.addEventListener('keydown', e => {
+        if (slides.length < 2) return;
+
+        if (e.key === "ArrowLeft") {
+            index = (index - 1 + slides.length) % slides.length;
+            showSlide(index);
+        }
+        if (e.key === "ArrowRight") {
+            index = (index + 1) % slides.length;
+            showSlide(index);
+        }
     });
+
+    showSlide(index);
 }
-
-// Keyboard controls
-document.addEventListener('keydown', e => {
-    if (slides.length < 2) return;
-
-    if (e.key === "ArrowLeft") {
-        index = (index - 1 + slides.length) % slides.length;
-        showSlide(index);
-    }
-    if (e.key === "ArrowRight") {
-        index = (index + 1) % slides.length;
-        showSlide(index);
-    }
-});
-
-// Init
-showSlide(index);
 
 </script>
 

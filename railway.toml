@@ -7,16 +7,6 @@ providers = ["python"]
 [deploy]
 numReplicas = 1
 
-# REQUIRED by Railway or it may ignore the releasePhase
-restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 3
-
-# Start the Django app via Gunicorn
 startCommand = "gunicorn tatygazelle_site.wsgi:application --bind 0.0.0.0:$PORT"
 
-# Release phase: runs BEFORE the new version becomes active
-releaseCommand = """
-python manage.py migrate &&
-python manage.py create_admin &&
-python manage.py collectstatic --noinput
-"""
+releaseCommand = "python manage.py migrate && python manage.py create_admin && python manage.py collectstatic --noinput"

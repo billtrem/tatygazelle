@@ -295,6 +295,91 @@ body.landing-only main {
 }
 
 /* -----------------------------------------------------------
+   HOMEPAGE CAROUSEL — DESKTOP ONLY
+----------------------------------------------------------- */
+
+.desktop-carousel {
+    display: block;
+}
+
+.mobile-image-list {
+    display: none;
+}
+
+.carousel-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.slide {
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+/* Arrows for desktop */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    font-size: 32px;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.carousel-btn.prev { left: -55px; }
+.carousel-btn.next { right: -55px; }
+
+/* -----------------------------------------------------------
+   MOBILE VERSION — SHOW ALL IMAGES AS A SCROLLING FEED
+----------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+    /* Hide carousel fully on mobile */
+    .desktop-carousel {
+        display: none;
+    }
+
+    /* Show stacked images */
+    .mobile-image-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 10px;
+    }
+
+    .mobile-image-list img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+}
+
+
+
+
+/* -----------------------------------------------------------
    PROJECTS GRID (Portfolio Index Page)
 ----------------------------------------------------------- */
 
@@ -424,7 +509,7 @@ body.landing-only main {
 
 footer {
     text-align: center;
-    padding: 50px 0 35px;
+    padding: 0px 0 35px;
     margin-top: 50px;
     opacity: 0.6;
     font-size: 13px;
