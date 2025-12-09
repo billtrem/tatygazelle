@@ -141,7 +141,7 @@ STATIC_URL = "/static/"
 
 # IMPORTANT: Collect from main/static/main/
 STATICFILES_DIRS = [
-    BASE_DIR / "main" / "static" / "main",
+    BASE_DIR / "main" / "static",
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
