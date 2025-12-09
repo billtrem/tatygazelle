@@ -133,17 +133,19 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
 # ---------------------------------------
 # STATIC FILES (Railway + Whitenoise)
 # ---------------------------------------
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "main" / "static"]
+
+# IMPORTANT: Collect from main/static/main/
+STATICFILES_DIRS = [
+    BASE_DIR / "main" / "static" / "main",
+]
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# In Production → compressed manifest storage
-# In Dev → simpler static handling
 STATICFILES_STORAGE = (
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
     if not DEBUG
