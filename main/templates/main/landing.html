@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="landing-hero">
+    {% if hero_image %}
+        <img src="{{ hero_image.image.url }}" alt="Hero image for Taty Gazelle">
+    {% endif %}
+
+    <div class="landing-overlay">
+        <h1 class="landing-title">Taty Gazelle</h1>
+        <p class="landing-subtitle">Photography & Visual Art</p>
+
+        <a href="{% url 'project_list' %}" class="landing-btn">
+            View Projects
+        </a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="carousel-container">
+    <div class="carousel-wrapper">
+
+        {% if images|length > 1 %}
+            <button class="carousel-btn prev">&#10094;</button>
+        {% endif %}
+
+        <div class="carousel-slide">
+            {% for image in images %}
+                <div class="slide{% if forloop.first %} active{% endif %}">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if images|length > 1 %}
+            <button class="carousel-btn next">&#10095;</button>
+        {% endif %}
+    </div>
+</div>
+
+
+<script>
+// ----------------------
+// CAROUSEL LOGIC
+// ----------------------
+const slides = document.querySelectorAll('.slide');
+let index = 0;
+
+function showSlide(i) {
+    slides.forEach((s, idx) => {
+        s.classList.toggle("active", idx === i);
+        s.style.display = idx === i ? "block" : "none";
+    });
+}
+
+// Buttons only exist if >1 slide
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
+    });
+}
+
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    });
+}
+
+// Keyboard controls
+document.addEventListener('keydown', e => {
+    if (slides.length < 2) return;
+
+    if (e.key === "ArrowLeft") {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
+    }
+    if (e.key === "ArrowRight") {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    }
+});
+
+// Init
+showSlide(index);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<div class="info-page">
+    <div class="info-grid">
+
+        <!-- Portrait Image -->
+        {% if info and info.portrait %}
+        <div class="info-image">
+            <img src="{{ info.portrait.url }}" alt="Portrait of Taty Gazelle">
+        </div>
+        {% endif %}
+
+        <!-- Bio Text -->
+        <div class="info-text">
+            <h2>About Taty Gazelle</h2>
+
+            {% if info and info.bio %}
+                <p>{{ info.bio|linebreaksbr }}</p>
+            {% else %}
+                <p>Taty Gazelle is a visual storyteller whose work spans photography, portraiture, and artistic documentation.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

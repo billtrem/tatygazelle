@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<h2 class="page-title">Projects</h2>
+
+<div class="project-list">
+    {% for project in projects %}
+        <a href="{% url 'project_detail' project.slug %}" class="project-card">
+
+            {% if project.cover_image %}
+                <img 
+                    src="{{ project.cover_image.url }}" 
+                    alt="{{ project.title }} — cover image"
+                    loading="lazy"
+                >
+            {% else %}
+                <div class="placeholder-image">
+                    <p>No cover image</p>
+                </div>
+            {% endif %}
+
+            <h3>{{ project.title }}</h3>
+
+        </a>
+    {% empty %}
+        <p>No projects have been added yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

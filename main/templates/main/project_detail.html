@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<div class="project-detail">
+
+    <!-- Project Title -->
+    <h2 class="project-detail-title">{{ project.title }}</h2>
+
+    <!-- Description -->
+    {% if project.description %}
+        <p class="project-detail-description">
+            {{ project.description|linebreaksbr }}
+        </p>
+    {% endif %}
+
+    <!-- Images -->
+    <div class="project-detail-images">
+        {% for image in project.images.all %}
+            <img 
+                src="{{ image.image.url }}" 
+                alt="{{ project.title }} image {{ forloop.counter }}"
+                loading="lazy"
+            >
+        {% empty %}
+            <p>No images uploaded for this project yet.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
