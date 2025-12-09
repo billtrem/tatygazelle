@@ -157,8 +157,8 @@ header {
     font-size: 40px;
     align-self: flex-end;
     cursor: pointer;
+    color: #000;  /* or white if you prefer */
 }
-
 /* Optional: reduce scroll behind open menu */
 body.menu-open {
     overflow: hidden;
