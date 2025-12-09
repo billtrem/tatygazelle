@@ -1,4 +1,10 @@
 /* -----------------------------------------------------------
+   IMPORT FONT (Bauhaus-inspired geometric sans)
+   Josefin Sans is a clean modern geometric choice.
+----------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
+
+/* -----------------------------------------------------------
    GLOBAL RESET + TYPOGRAPHY
 ----------------------------------------------------------- */
 
@@ -13,10 +19,22 @@ html {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:
+        "Josefin Sans",
+        "Futura",
+        "Avenir Next",
+        "Avenir",
+        "Montserrat",
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     background: #ffffff;
     color: #111;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 a {
@@ -31,12 +49,26 @@ img {
 
 /* -----------------------------------------------------------
    LAYOUT FRAME
+   Desktop max width 1200px
+   Mobile padding so content doesn't hit edges
 ----------------------------------------------------------- */
 
 .container {
-    max-width: 1350px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 28px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .container {
+        padding: 0 14px;
+    }
 }
 
 /* -----------------------------------------------------------
@@ -47,19 +79,30 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 35px 0;
-    font-size: 18px;
+    padding: 28px 0;
 }
 
 .site-title a {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .navbar {
     display: flex;
-    gap: 40px;
+    gap: 32px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.navbar a {
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+}
+
+.navbar a:hover {
+    opacity: 1;
 }
 
 .hamburger {
@@ -67,13 +110,14 @@ header {
     background: none;
     border: none;
     font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
 }
 
 @media (max-width: 850px) {
     .navbar {
         display: none;
     }
-
     .hamburger {
         display: block;
     }
@@ -85,16 +129,21 @@ header {
 
 .mobile-menu {
     position: fixed;
-    top: 0; left: 100%;
+    top: 0;
+    left: 100%;
+
     width: 100%;
     height: 100vh;
-    background: white;
+
+    background: #ffffff;
     display: flex;
     flex-direction: column;
-    padding: 60px 30px;
+
+    padding: 50px 26px;
     font-size: 24px;
-    gap: 30px;
-    transition: left 0.4s ease;
+    gap: 26px;
+
+    transition: left 0.35s ease;
     z-index: 999;
 }
 
@@ -107,64 +156,142 @@ header {
     border: none;
     font-size: 40px;
     align-self: flex-end;
+    cursor: pointer;
 }
 
-/* -----------------------------------------------------------
-   LANDING PAGE — Fullscreen Cinematic Hero
------------------------------------------------------------ */
-
-.landing-hero {
-    position: relative;
-    height: 90vh;
+/* Optional: reduce scroll behind open menu */
+body.menu-open {
     overflow: hidden;
 }
 
-.landing-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(80%);
-    transform: scale(1.05);
-    animation: heroFade 1.4s ease forwards;
+/* -----------------------------------------------------------
+   MAIN CONTENT SPACING
+----------------------------------------------------------- */
+
+main {
+    padding: 10px 0 30px 0;
 }
 
-@keyframes heroFade {
-    from { opacity: 0; transform: scale(1.1); }
-    to { opacity: 1; transform: scale(1.0); }
+/* -----------------------------------------------------------
+   LANDING PAGE / HERO — FULLSCREEN BLACK INTRO
+   IMPORTANT:
+   - We DO NOT hide .container here
+   - Only hide header/footer to avoid breaking other pages
+----------------------------------------------------------- */
+
+.landing-hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: #000;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.landing-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    filter: brightness(60%);
+    z-index: 1001;
+
+    animation: fadeIn 1.4s ease-in-out;
 }
 
 .landing-overlay {
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
+
     text-align: center;
-    color: white;
+    z-index: 1002;
+
+    color: #fff !important;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85);
+
+    animation: fadeUp 1.1s ease-out;
 }
 
 .landing-title {
-    font-size: 54px;
-    letter-spacing: 2px;
+    font-size: 4.2rem;
     font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #fff !important;
 }
 
 .landing-subtitle {
-    font-size: 20px;
-    margin-top: 15px;
-    opacity: 0.8;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    opacity: 0.95;
+    margin-bottom: 28px;
+    color: #fff !important;
 }
 
 .landing-btn {
-    margin-top: 35px;
-    padding: 12px 32px;
-    background: white;
+    display: inline-block;
+    padding: 12px 30px;
+
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    color: #fff;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 1.05rem;
     letter-spacing: 1px;
-    transition: all 0.3s ease;
+    text-transform: uppercase;
+
+    transition: all 0.22s ease;
 }
 
 .landing-btn:hover {
-    background: #dcdcdc;
+    background: #fff;
+    color: #000;
+}
+
+/* Landing-only mode */
+body.landing-only {
+    background: #000 !important;
+    overflow: hidden;
+}
+
+/* Hide only chrome */
+body.landing-only header,
+body.landing-only footer {
+    display: none !important;
+}
+
+/* Remove normal content spacing on landing */
+body.landing-only main {
+    padding: 0 !important;
+}
+
+/* Responsive landing typography */
+@media (max-width: 768px) {
+    .landing-title {
+        font-size: 2.7rem;
+    }
+    .landing-subtitle {
+        font-size: 1.1rem;
+    }
+    .landing-btn {
+        font-size: 0.95rem;
+        padding: 10px 22px;
+    }
 }
 
 /* -----------------------------------------------------------
@@ -173,25 +300,41 @@ header {
 
 .project-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    gap: 35px;
-    padding: 40px 0;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+    padding: 28px 0 10px;
+}
+
+.project-card {
+    display: block;
 }
 
 .project-card img {
+    width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
     border-radius: 6px;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .project-card:hover img {
-    opacity: 0.85;
+    opacity: 0.9;
+    transform: translateY(-2px);
 }
 
 .project-card h3 {
     margin-top: 12px;
     font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+}
+
+/* Tighten grid on very small screens */
+@media (max-width: 520px) {
+    .project-list {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
 }
 
 /* -----------------------------------------------------------
@@ -200,25 +343,28 @@ header {
 
 .project-detail-title {
     font-size: 34px;
-    margin: 35px 0 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 30px 0 14px;
 }
 
 .project-detail-description {
-    line-height: 1.6;
-    max-width: 850px;
-    margin-bottom: 40px;
+    line-height: 1.65;
+    font-size: 17px;
+    max-width: 900px;
+    margin-bottom: 36px;
+    opacity: 0.9;
 }
 
 .project-detail-images {
     display: flex;
     flex-direction: column;
-    gap: 45px;
+    gap: 36px;
 }
 
 .project-detail-images img {
     width: 100%;
     height: auto;
-    object-fit: cover;
     border-radius: 4px;
 }
 
@@ -226,34 +372,49 @@ header {
    INFO / ABOUT PAGE
 ----------------------------------------------------------- */
 
-.info-grid {
-    display: grid;
-    grid-template-columns: 450px 1fr;
-    gap: 60px;
-    align-items: start;
-    margin-top: 50px;
+.info-page {
+    padding: 20px 0 10px;
 }
 
-.info-image img {
-    border-radius: 6px;
+.info-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 50px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+.portrait {
     width: 100%;
     height: auto;
+    border-radius: 6px;
+    object-fit: cover;
 }
 
 .info-text h2 {
     font-size: 28px;
-    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
 }
 
 .info-text p {
     line-height: 1.7;
     font-size: 17px;
+    opacity: 0.95;
+}
+
+@media (max-width: 980px) {
+    .info-grid {
+        grid-template-columns: 320px 1fr;
+        gap: 36px;
+    }
 }
 
 @media (max-width: 850px) {
     .info-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 26px;
     }
 }
 
@@ -263,8 +424,24 @@ header {
 
 footer {
     text-align: center;
-    padding: 40px 0;
-    margin-top: 60px;
+    padding: 50px 0 35px;
+    margin-top: 50px;
     opacity: 0.6;
-    font-size: 14px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* -----------------------------------------------------------
+   ANIMATIONS
+----------------------------------------------------------- */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(1.04); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translate(-50%, -44%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
 }
