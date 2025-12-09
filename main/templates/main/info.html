@@ -7,18 +7,18 @@
         <!-- Portrait Image -->
         {% if info and info.portrait %}
         <div class="info-image">
-            <img src="{{ info.portrait.url }}" alt="Portrait of Taty Gazelle">
+            <img src="{{ info.portrait.url }}" alt="Portrait">
         </div>
         {% endif %}
 
         <!-- Bio Text -->
         <div class="info-text">
-            <h2>About Taty Gazelle</h2>
+            <h2>About</h2>
 
             {% if info and info.bio %}
                 <p>{{ info.bio|linebreaksbr }}</p>
             {% else %}
-                <p>Taty Gazelle is a visual storyteller whose work spans photography, portraiture, and artistic documentation.</p>
+                <p>This page will soon feature an artist biography and contact details.</p>
             {% endif %}
         </div>
 
