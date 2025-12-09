@@ -139,18 +139,16 @@ else:
 
 STATIC_URL = "/static/"
 
-# IMPORTANT: Collect from main/static/main/
+# Tell Django EXACTLY where your static files live
 STATICFILES_DIRS = [
     BASE_DIR / "main" / "static",
 ]
 
+# Where collectstatic will output
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_STORAGE = (
-    "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    if not DEBUG
-    else "whitenoise.storage.StaticFilesStorage"
-)
+# Correct WhiteNoise storage backend (must be this one)
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # ---------------------------------------
 # CLOUDINARY STORAGE
