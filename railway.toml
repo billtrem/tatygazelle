@@ -7,8 +7,11 @@ providers = ["python"]
 [deploy]
 numReplicas = 1
 
-startCommand = """
+# Runs BEFORE the app starts – only ONCE per deploy
+releaseCommand = """
 python manage.py migrate --noinput &&
-python manage.py collectstatic --noinput &&
-gunicorn tatygazelle_site.wsgi:application --bind 0.0.0.0:$PORT
+python manage.py collectstatic --noinput
 """
+
+# Starts the app – MUST be only the server
+startCommand = "gunicorn tatygazelle_site.wsgi:application --bind 0.0.0.0:$PORT"
