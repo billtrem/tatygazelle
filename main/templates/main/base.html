@@ -53,12 +53,28 @@
             <main>
                 {% block content %}{% endblock %}
             </main>
+<footer>
+    <div class="footer-inner">
 
-            <footer>
-                <p>&copy; {% now "Y" %} Taty Gazelle</p>
-            </footer>
+        <a href="https://www.instagram.com/tatyanagazelle/"
+           class="footer-social"
+           target="_blank"
+           rel="noopener"
+           aria-label="Taty Gazelle on Instagram">
+            <img src="{% static 'main/instagram.png' %}" alt="Instagram">
+        </a>
+
+        <p> @tatygazelle</p>
+
+    </div>
+</footer>
+
+
+
         </div>
     </div>
+
+    
 
     <script>
     function toggleMenu() {
